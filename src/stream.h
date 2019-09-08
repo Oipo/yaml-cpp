@@ -10,6 +10,7 @@
 #include "yaml-cpp/mark.h"
 #include <cstddef>
 #include <deque>
+#include <vector>
 #include <ios>
 #include <iostream>
 #include <set>
@@ -50,7 +51,7 @@ class Stream {
   Mark m_mark;
 
   CharacterSet m_charSet;
-  mutable std::deque<char> m_readahead;
+  mutable std::vector<char> m_readahead;
   unsigned char* const m_pPrefetched;
   mutable size_t m_nPrefetchedAvailable;
   mutable size_t m_nPrefetchedUsed;

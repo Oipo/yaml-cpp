@@ -157,7 +157,7 @@ inline char Utf8Adjust(unsigned long ch, unsigned char lead_bits,
       static_cast<unsigned char>(header | ((ch >> rshift) & mask)));
 }
 
-inline void QueueUnicodeCodepoint(std::deque<char>& q, unsigned long ch) {
+inline void QueueUnicodeCodepoint(std::vector<char>& q, unsigned long ch) {
   // We are not allowed to queue the Stream::eof() codepoint, so
   // replace it with CP_REPLACEMENT_CHARACTER
   if (static_cast<unsigned long>(Stream::eof()) == ch) {
@@ -288,7 +288,8 @@ void Stream::eat(int n) {
 
 void Stream::AdvanceCurrent() {
   if (!m_readahead.empty()) {
-    m_readahead.pop_front();
+    //m_readahead.pop_front();
+    m_readahead.erase(begin(m_readahead));
     m_mark.pos++;
   }
 
